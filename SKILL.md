@@ -782,6 +782,49 @@ auto_export: false  # 是否自动导出
 
 ---
 
+## MCP Client Compatibility Notes
+
+This skill works with multiple MCP clients, but some features are client-specific:
+
+### QClaw (OpenClaw)
+- ✅ Full support for all features
+- ✅ Sub-agent workflow with `sessions_spawn`
+- ✅ File output and export
+- ✅ Multi-round dialogue
+
+### Claude Code
+- ✅ Core research workflow (interactive guide, search, scoring, output)
+- ⚠️ **No sub-agent support** - Claude Code does not have `sessions_spawn` tool
+- ✅ Use **WebSearch tool directly in main conversation** instead of spawning agents
+- ✅ File output via `write` tool
+- ⚠️ Background Agent mode has permission approval issues
+
+**Claude Code Adaptation:**
+
+In Claude Code environment, **do NOT use sub-agents**. Instead:
+
+1. **Use WebSearch directly in main conversation** - Search each source sequentially
+2. **No parallel processing** - Process sources one by one
+3. **Simpler workflow** - Skip sub-agent spawning, directly call WebSearch
+
+Example Claude Code workflow:
+```
+User: Find recent papers on GLP-1 and kidney transplant
+
+[In Claude Code, directly use WebSearch tool]
+1. WebSearch: "GLP-1 kidney transplant PubMed 2024-2026"
+2. WebSearch: "GLP-1 receptor agonist transplant outcomes Google Scholar"
+3. Process and deduplicate results
+4. Score and format output
+5. Ask user: Save to file? (Markdown/JSON/CSV)
+```
+
+### Cursor
+- ✅ Core research workflow
+- ⚠️ Sub-agent support depends on Cursor version
+- ✅ File output and export
+
+---
 
 ## Sub-Agent Workflow (Optional)
 
@@ -819,6 +862,8 @@ auto_export: false  # 是否自动导出
 - `cleanup`: `"delete"` (完成后自动删除) 或 `"keep"` (保留会话)
 - `runTimeoutSeconds`: 超时时间（秒），默认 0 = 无超时
 - `lightContext`: `true` (使用轻量级上下文，减少 token 消耗)
+
+**⚠️ Claude Code Note:** Claude Code does not support `sessions_spawn`. Use WebSearch tool directly in main conversation instead.
 
 ### 按模式划分的子代理工作流
 
