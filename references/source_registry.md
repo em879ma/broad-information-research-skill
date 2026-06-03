@@ -39,7 +39,7 @@ This file defines the recommended information sources for each research mode.
 |------------|---------------------|--------------|
 | Official Announcements | Company blogs, government websites, institution announcements | Prioritize confirming facts themselves |
 | Authoritative Media | Reuters, AP, Bloomberg, Financial Times, The Verge, 36Kr, Caixin | Used to supplement background and impact |
-| **WeChat Public Accounts** (微信公众号) | **wechat-query skill** — 依赖 wechat-download-api 服务 | **重要信息源！** 大量国内行业信息只在公众号发布。需要先部署服务并扫码登录。详见 `SKILL.md` 中「微信公众号信息源集成」章节 |
+| **WeChat Public Accounts** (微信公众号) | **wechat-query skill** — 依赖 wechat-download-api 服务 | **重要信息源！** 大量国内行业信息只在公众号发布。需要先部署服务并扫码登录。详见 `SKILL.md` 中「微信公众号信息源集成」章节。**垂直领域公众号库见 `wechat_accounts_registry.md`** |
 | **Social Media Crawling** | **MediaCrawler** — 爬取 **小红书、知乎、微博、B站** 等平台 | **重要信息源！** 大量实时讨论和用户反馈只在社交媒体平台。使用 `MediaCrawler API (http://localhost:8080)` |
 | Social/Community | X (Twitter), Reddit, Hacker News, Zhihu | Only as early signals or opinion sources |
 
