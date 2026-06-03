@@ -2,7 +2,8 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT" />
-  <img src="https://img.shields.io/badge/version-0.2-beta-orange.svg" alt="Version: 0.2 Beta" />
+  <img src="https://img.shields.io/badge/version-0.3--beta-orange.svg" alt="Version: 0.3 Beta" />
+  <img src="https://img.shields.io/badge/MCP-Server-green.svg" alt="MCP Server" />
   <img src="https://img.shields.io/badge/QClaw-Skill-green.svg" alt="QClaw Skill" />
   <img src="https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey.svg" alt="Platform: macOS | Linux | Windows" />
 </p>
@@ -337,6 +338,53 @@ After generating results, you can:
 > Save to file
 > Export as PDF
 ```
+
+---
+
+### v0.3: MCP Server Integration (Recommended)
+
+The core logic has been extracted to a standalone **MCP server** that can be used with QClaw, Claude Code, Cursor, and any MCP-compatible client.
+
+
+**Installation:**
+```bash
+# Clone repositories
+git clone https://github.com/em879ma/broad-information-research-skill.git
+cd broad-information-research-skill
+
+# Create venv
+uv venv .venv --python 3.11
+VIRTUAL_ENV=.venv uv pip install mcp pydantic>=2 -e ./broad-information-research-core
+
+# Configure in QClaw (add to openclaw.json)
+# {
+#   "mcp": {
+#     "servers": {
+#       "broad-information-research": {
+#         "command": "path/to/.venv/bin/python",
+#         "args": ["-m", "broad_information_research_mcp.server"],
+#         "cwd": "path/to/broad-information-research-mcp"
+#       }
+#     }
+#   }
+# }
+```
+
+**Available Tools (8 total):**
+
+| Tool | Description |
+|------|------------|
+| `classify_research_task` | Classify query into 7 research modes |
+| `get_sources_for_task` | Get recommended info sources by mode |
+| `generate_search_queries` | Generate optimized search queries |
+| `deduplicate_results` | Remove duplicate results (Jaccard similarity) |
+| `score_results` | Score by credibility/freshness/relevance |
+| `render_output` | Render results in MD/HTML/JSON/Text |
+| `crawl_social_media` | Crawl platforms via MediaCrawler |
+| `mediacrawler_status` | Check MediaCrawler availability |
+
+
+See also: [broad-information-research-core](https://github.com/em879ma/broad-information-research-core) (core Python library) · [broad-information-research-mcp](https://github.com/em879ma/broad-information-research-mcp) (MCP server)
 
 ---
 
@@ -680,13 +728,20 @@ python scripts/export_report.py --input outputs/scored_results.json --format ten
 - [x] CLI mode wrapper script
 - [x] Interactive installation prompt
 
-### 🔄 v0.3 WeChat Integration (In Progress)
+### ✅ v0.3 MCP Server & Core Library (Completed)
+- [x] Extract core logic to standalone Python package `broad-information-research-core`
+- [x] Build MCP service `broad-information-research-mcp` with 8 tools
+- [x] Compatible with QClaw, Claude Code, Cursor, and any MCP client
+- [x] Verified all 8 tools working (classify, sources, queries, dedupe, score, render, crawl, status)
+- [x] Independent venv with MCP 1.27.2 + pydantic 2.x
+
+### ✅ v0.2 MediaCrawler Integration (Completed)
 - [x] Integrate wechat-download-api for WeChat official accounts
 - [ ] Improve WeChat article parsing
 - [ ] Add WeChat account subscription management
 - [ ] Add more Chinese-language sources
 
-### 📅 v0.4 Export & Integration (Planned)
+### 🔄 v0.4 WeChat Integration (In Progress)
 - [ ] Export to Tencent Docs
 - [ ] Export to PDF
 - [ ] Integration with more QClaw skills
