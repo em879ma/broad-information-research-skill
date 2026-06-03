@@ -222,50 +222,13 @@ uv pip install mcp pydantic>=2 -e .
 **Step 3: Configure in your MCP client**
 
 See [MCP Server Configuration](#-mcp-server-configuration) section below for QClaw, Claude Code, and Cursor setup.
-### Optional: Install MediaCrawler (for social media crawling)
+### Optional Dependencies
 
-```bash
-# 1. Install uv (if not installed)
-curl -LsSf https://astral.sh/uv/install.sh | sh
+**MediaCrawler** (for social media crawling): https://github.com/NanmiCoder/MediaCrawler
 
-# 2. Clone MediaCrawler
-cd ~
-git clone https://github.com/NanmiCoder/MediaCrawler.git
-cd MediaCrawler
+**WeChat Query Skill** (for WeChat official account articles): https://github.com/adennng/wechat-query-skill
 
-# 3. Install dependencies
-uv sync
-
-# 4. Install Playwright browser
-uv run playwright install chromium
-
-# 5. Configure (disable CDP mode, use Playwright mode)
-sed -i '' 's/ENABLE_CDP_MODE: bool = True/ENABLE_CDP_MODE: bool = False/' config/base_config.py
-
-# 6. Test run (scan QR code to login)
-uv run python main.py --platform xhs --lt qrcode --type search --keywords "test" --crawler_max_notes_count 5
-```
-
-### Optional: Install WeChat Download API (for WeChat official accounts)
-
-```bash
-# 1. Install Docker (if not installed)
-# Download from: https://www.docker.com/products/docker-desktop
-
-# 2. Clone wechat-download-api
-cd ~
-git clone https://github.com/your-repo/wechat-download-api.git
-cd wechat-download-api
-
-# 3. Start with docker-compose
-docker-compose up -d
-
-# 4. Check status
-curl <INTERNAL_HOST_REMOVED>
-
-# 5. Login by scanning QR code
-# Open <INTERNAL_HOST_REMOVED> in browser, scan QR code with WeChat
-```
+When searching these channels, the skill will automatically ask if you want to install them.
 
 ---
 
@@ -382,91 +345,17 @@ This repo contains both the core Python library (`broad_information_research/`) 
 
 ## 🕷️ MediaCrawler Integration
 
-MediaCrawler is a powerful web crawler that supports **7 platforms**:
+This skill uses **MediaCrawler** for social media crawling: https://github.com/NanmiCoder/MediaCrawler
 
-| Platform | Command | Login Method |
-|----------|---------|-------------|
-| 小红书 (Xiaohongshu) | `--platform xhs` | QR code scan |
-| 知乎 (Zhihu) | `--platform zhihu` | QR code scan |
-| 微博 (Weibo) | `--platform weibo` | QR code scan |
-| B站 (Bilibili) | `--platform bili` | QR code scan |
-| 抖音 (Douyin) | `--platform dy` | QR code scan |
-| 快手 (Kuaishou) | `--platform ks` | QR code scan |
-| 贴吧 (Tieba) | `--platform tieba` | QR code scan |
-
-### How it works
-
-1. The skill detects if your request involves social media platforms
-2. If MediaCrawler is not installed, the skill **automatically asks if you want to install it**
-3. If you agree, the skill provides installation instructions
-4. After installation, the skill runs MediaCrawler CLI to crawl data
-5. Results are saved to `MediaCrawler/data/<platform>/jsonl/` directory
-
-### Example: Crawl Xiaohongshu notes
-
-```bash
-cd ~/MediaCrawler
-uv run python main.py \
-  --platform xhs \
-  --lt qrcode \
-  --type search \
-  --keywords "AI tools" \
-  --crawler_max_notes_count 20
-```
-
-This will:
-- Open a browser and display a QR code
-- You scan the QR code with Xiaohongshu app to login
-- Crawl 20 notes with keyword "AI tools"
-- Save results to `MediaCrawler/data/xhs/jsonl/`
-
-### Supported content types
-
-- **Search** (`--type search`) - Search notes/videos by keyword
-- **Creator** (`--type creator`) - Get creator's posts
-- **Detail** (`--type detail`) - Get note/video details
+When your research involves Xiaohongshu, Bilibili, Weibo, Zhihu, Douyin, Kuaishou, or Tieba, the skill will automatically ask if you want to install it.
 
 ---
 
 ## 📱 WeChat Official Account Integration
 
-WeChat official accounts are a major source of high-quality Chinese-language content. This skill integrates with `wechat-download-api` to search and download official account articles.
+This skill uses **WeChat Query Skill** to search WeChat official account articles: https://github.com/adennng/wechat-query-skill
 
-### How it works
-
-1. The skill detects if your request involves Chinese-language sources
-2. If wechat-download-api is not running, the skill asks if you want to start it
-3. If you agree, the skill provides docker-compose instructions
-4. After starting, you need to login by scanning a QR code
-5. The skill can then search official accounts and download articles
-
-### Setup
-
-**Step 1: Start wechat-download-api**
-```bash
-cd ~/wechat-download-api
-docker-compose up -d
-```
-
-**Step 2: Check status**
-```bash
-curl <INTERNAL_HOST_REMOVED>
-# Should return: {"status": "healthy", ...}
-```
-
-**Step 3: Login**
-- Open `<INTERNAL_HOST_REMOVED> in browser
-- Scan QR code with WeChat app
-- After login, the API can access your official accounts
-
-### Usage
-
-After setup, the skill can:
-```
-> Search WeChat official accounts for "AI" 
-> Get latest articles from "全球人工智能" official account
-> Download articles from "机器之心" in the past month
-```
+When searching Chinese-language sources, the skill will automatically ask if you want to install it.
 
 ---
 
