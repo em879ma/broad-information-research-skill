@@ -216,7 +216,7 @@ cd broad-information-research-skill
 uv venv .venv --python 3.11
 source .venv/bin/activate  # macOS/Linux
 # .venv\Scripts\activate    # Windows
-uv pip install mcp pydantic>=2 -e ./broad-information-research-core
+uv pip install mcp pydantic>=2 -e .
 ```
 
 **Step 3: Configure in your MCP client**
@@ -345,7 +345,8 @@ cd broad-information-research-skill
 
 # Create venv
 uv venv .venv --python 3.11
-VIRTUAL_ENV=.venv uv pip install mcp pydantic>=2 -e ./broad-information-research-core
+source .venv/bin/activate
+uv pip install mcp pydantic>=2 -e .
 
 # Configure in QClaw (add to openclaw.json)
 # {
@@ -354,7 +355,7 @@ VIRTUAL_ENV=.venv uv pip install mcp pydantic>=2 -e ./broad-information-research
 #       "broad-information-research": {
 #         "command": "path/to/.venv/bin/python",
 #         "args": ["-m", "broad_information_research_mcp.server"],
-#         "cwd": "path/to/broad-information-research-mcp"
+#         "cwd": "/path/to/broad-information-research-skill"
 #       }
 #     }
 #   }
@@ -375,7 +376,7 @@ VIRTUAL_ENV=.venv uv pip install mcp pydantic>=2 -e ./broad-information-research
 | `mediacrawler_status` | Check MediaCrawler availability |
 
 
-See also: [broad-information-research-core](https://github.com/em879ma/broad-information-research-core) (core Python library) · [broad-information-research-mcp](https://github.com/em879ma/broad-information-research-mcp) (MCP server)
+This repo contains both the core Python library (`broad_information_research/`) and the MCP server (`broad_information_research_mcp/`).
 
 ---
 
@@ -629,9 +630,10 @@ Saved to: outputs/news_digest_openai_gpt_20260603.md
 
 ```
 broad-information-research-skill/
-├── SKILL.md                    # QClaw skill instructions (for QClaw users)
+├── SKILL.md                    # QClaw skill instructions (interactive guide)
 ├── README.md                   # This file
 ├── LICENSE                     # MIT License
+├── pyproject.toml              # Root project config (declares both packages)
 ├── references/                 # Reference data and rules
 │   ├── source_registry.md      # Source channels by mode
 │   ├── source_registry_ai_events.md  # AI event sources
@@ -661,10 +663,24 @@ broad-information-research-skill/
 │   ├── academic_research_glp1_kidney_transplant_20260602.md
 │   ├── competitor_analysis_ai_meeting_assistant_20260602.md
 │   └── ...
-└── tests/                      # Test cases
-    ├── routing_tests.md        # Task classification tests
-    ├── source_selection_tests.md   # Source selection tests
-    └── output_quality_tests.md     # Output quality tests
+├── tests/                      # Test cases
+│   ├── routing_tests.md        # Task classification tests
+│   ├── source_selection_tests.md   # Source selection tests
+│   └── output_quality_tests.md     # Output quality tests
+├── broad_information_research/   # Core Python library
+│   ├── __init__.py
+│   ├── task_classifier.py       # 7-mode task classifier
+│   ├── source_selector.py       # Source registry by mode
+│   ├── query_generator.py       # Query generation for 4+ source types
+│   ├── deduplicator.py          # Jaccard similarity dedup
+│   ├── scorer.py                # 3-dimension scoring
+│   ├── output_renderer.py       # MD/HTML/JSON/Text output
+│   └── mediacrawler_client.py   # MediaCrawler CLI wrapper
+└── broad_information_research_mcp/  # MCP server package
+    ├── __init__.py
+    ├── server.py                 # 8 MCP tools
+    ├── pyproject.toml           # MCP package config
+    └── README.md                 # MCP server docs
 ```
 
 ---
@@ -847,7 +863,7 @@ QR code scan fails or times out
 
 ### Q4: Can I use this skill without QClaw?
 
-**A:** Yes! This is now primarily an **MCP server** that works with any MCP-compatible client (QClaw, Claude Code, Cursor, etc.). You can also use the core Python library (`broad-information-research-core`) directly in your own projects.
+**A:** Yes! This is now primarily an **MCP server** that works with any MCP-compatible client (QClaw, Claude Code, Cursor, etc.). You can also use the core Python library (`broad_information_research/`) directly in your own projects.
 
 ---
 

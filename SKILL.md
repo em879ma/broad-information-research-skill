@@ -1,9 +1,11 @@
 ---
 name: broad-information-research
-description: Use this skill to collect, screen, verify, and summarize information for academic research, competitor analysis, domain news, market trends, events, policy research, and company intelligence.
+description: Use this skill to collect, screen, verify, and summarize information for academic research, competitor analysis, domain news, market trends, events, policy research, and company intelligence. This skill also provides 8 MCP tools for workflow automation.
 ---
 
 # Broad Information Research Skill
+
+> **MCP Tools Available:** This skill exposes 8 MCP tools (`classify_research_task`, `get_sources_for_task`, `generate_search_queries`, `deduplicate_results`, `score_results`, `render_output`, `crawl_social_media`, `mediacrawler_status`). Install the MCP server to use them directly.
 
 ## Purpose
 
