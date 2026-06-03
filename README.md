@@ -4,12 +4,12 @@
   <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT" />
   <img src="https://img.shields.io/badge/version-0.3--beta-orange.svg" alt="Version: 0.3 Beta" />
   <img src="https://img.shields.io/badge/MCP-Server-green.svg" alt="MCP Server" />
-  <img src="https://img.shields.io/badge/QClaw-Skill-green.svg" alt="QClaw Skill" />
+  <img src="https://img.shields.io/badge/MCP-Server-blue.svg" alt="MCP Server" />
   <img src="https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey.svg" alt="Platform: macOS | Linux | Windows" />
 </p>
 
 <p align="center">
-  <strong>A reusable QClaw skill for collecting, screening, verifying, and summarizing information across multiple domains.</strong>
+  <strong>A general-purpose MCP server for collecting, screening, verifying, and summarizing information across multiple domains — works with QClaw, Claude Code, Cursor, and any MCP client.</strong>
 </p>
 
 <p align="center">
@@ -31,6 +31,7 @@
 - [Key Features](#-key-features)
 - [Supported Research Modes](#-supported-research-modes)
 - [Installation](#-installation)
+- [MCP Server Configuration](#-mcp-server-configuration)
 - [Usage](#-usage)
 - [MediaCrawler Integration](#-mediacrawler-integration)
 - [WeChat Official Account Integration](#-wechat-official-account-integration)
@@ -58,12 +59,7 @@ git clone https://github.com/em879ma/broad-information-research-skill.git
 cp -r broad-information-research-skill ~/.qclaw/skills/
 ```
 
-**Then in QClaw:**
-```
-> Use this skill to find AI events in Shanghai next month
-```
-
-The skill will guide you through an interactive flow to collect, verify, and summarize information from multiple sources.
+The MCP server is now active and ready to use.
 
 ---
 
@@ -197,12 +193,11 @@ Credibility Scoring → Structured Output
 
 ### Prerequisites
 
-- **QClaw** (OpenClaw) installed and configured
-- **Python >= 3.10** (for MediaCrawler integration)
-- **uv** (Python package manager) - will be installed automatically if needed
-- **Chrome browser** (recommended) or Playwright
+- **Python >= 3.10** (3.11 recommended)
+- **uv** (Python package manager) — will be installed automatically if needed
+- **Git** for cloning
 
-### Option 1: Install via SkillHub (Recommended)
+### Option 1: Install via SkillHub (QClaw users)
 
 ```bash
 skillhub install broad-information-research
@@ -216,21 +211,17 @@ git clone https://github.com/em879ma/broad-information-research-skill.git
 cd broad-information-research-skill
 ```
 
-**Step 2: Copy to QClaw skills directory**
+**Step 2: Set up Python environment**
 ```bash
-# Managed skills directory (recommended)
-cp -r broad-information-research-skill ~/.qclaw/skills/
-
-# OR: Personal skills directory
-cp -r broad-information-research-skill ~/.agents/skills/
+uv venv .venv --python 3.11
+source .venv/bin/activate  # macOS/Linux
+# .venv\Scripts\activate    # Windows
+uv pip install mcp pydantic>=2 -e ./broad-information-research-core
 ```
 
-**Step 3: Verify installation**
-```bash
-ls ~/.qclaw/skills/broad-information-research-skill/
-# Should show: SKILL.md, README.md, LICENSE, references/, assets/, scripts/, examples/, tests/
-```
+**Step 3: Configure in your MCP client**
 
+See [MCP Server Configuration](#-mcp-server-configuration) section below for QClaw, Claude Code, and Cursor setup.
 ### Optional: Install MediaCrawler (for social media crawling)
 
 ```bash
@@ -638,7 +629,7 @@ Saved to: outputs/news_digest_openai_gpt_20260603.md
 
 ```
 broad-information-research-skill/
-├── SKILL.md                    # Main skill instructions (read by QClaw)
+├── SKILL.md                    # QClaw skill instructions (for QClaw users)
 ├── README.md                   # This file
 ├── LICENSE                     # MIT License
 ├── references/                 # Reference data and rules
@@ -736,15 +727,14 @@ python scripts/export_report.py --input outputs/scored_results.json --format ten
 - [x] Independent venv with MCP 1.27.2 + pydantic 2.x
 
 ### ✅ v0.2 MediaCrawler Integration (Completed)
-- [x] Integrate wechat-download-api for WeChat official accounts
-- [ ] Improve WeChat article parsing
-- [ ] Add WeChat account subscription management
-- [ ] Add more Chinese-language sources
+- [x] Integrate MediaCrawler CLI for 7 platforms (XHS, Weibo, Bilibili, Douyin, Kuaishou, Zhihu, Tieba)
+- [x] QR code login support for all platforms
+- [x] Auto-degradation when MediaCrawler unavailable
+- [x] Platform status check tool
 
-### 🔄 v0.4 WeChat Integration (In Progress)
+### 🔄 v0.4 Enhanced Output (In Progress)
 - [ ] Export to Tencent Docs
 - [ ] Export to PDF
-- [ ] Integration with more QClaw skills
 - [ ] Multi-turn conversation support
 
 ### 🚀 v1.0 Stable Release (Planned)
@@ -857,7 +847,7 @@ QR code scan fails or times out
 
 ### Q4: Can I use this skill without QClaw?
 
-**A:** No, this is a QClaw skill and requires QClaw (OpenClaw) to run. However, you can adapt the scripts and templates for other uses.
+**A:** Yes! This is now primarily an **MCP server** that works with any MCP-compatible client (QClaw, Claude Code, Cursor, etc.). You can also use the core Python library (`broad-information-research-core`) directly in your own projects.
 
 ---
 
