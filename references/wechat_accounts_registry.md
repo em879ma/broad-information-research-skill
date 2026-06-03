@@ -88,10 +88,17 @@ Each entry has the following fields:
 
 | Name | fakeid | Alias | Description | Use Cases |
 |------|--------|-------|-------------|-----------|
+| 商隐社 | `MzkwMzIxNDIyMA==` | shangyinshecj | 深度商业报道、企业案例研究 | 商业模式分析、企业深度报道 |
+| 军武次位面 | `MzI2MTA4Njg3Ng==` | junwu233 | 军事科技、国际局势分析 | 军事装备、地缘政治、国防科技 |
+| 功夫财经 | `MzIzOTA3NTA5Mg==` | kongfuf | 财经评论、投资观点 | 投资策略、财经热点解读 |
+| 正和岛 | `MjM5ODAxODQ0MA==` | zhenghedao | 企业家社群、商业思想 | 企业家访谈、管理思想、商业洞察 |
+| 正商参阅 | `MzIwODU1MTIyMw==` | zhengshangcanyue | 商业资讯、行业分析 | 行业趋势、商业参考 |
+| 中国经营报 | `MjA5NTMyOTMwMQ==` | chinabusinessjournal | 财经新闻、企业经营报道 | 企业动态、宏观经济、经营策略 |
+| MBA智库 | `MjM5NDE3NTcwMA==` | mbalib | 管理知识、商业案例库 | 管理理论、案例分析、商业知识 |
+| 星海情报局 | `MzI5MDQxNzE1NQ==` | junwu2333 | 商业情报、行业研究 | 竞品分析、市场研究、行业情报 |
 | 财经杂志 | `TODO: fill` | - | 深度财经报道 | 宏观经济、政策解读 |
 | 36氪 | `TODO: fill` | - | 科技财经、创业投资 | 创投动态、融资信息 |
 | 虎嗅APP | `TODO: fill` | - | 商业科技评论 | 商业模式分析、行业洞察 |
-| TODO: Add more | - | - | - | - |
 
 **Investment & Stock:**
 
