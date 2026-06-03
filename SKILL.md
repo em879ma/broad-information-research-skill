@@ -171,7 +171,7 @@ For AI events, use `references/source_registry_ai_events.md`.
 
 **微信公众号信息源（wechat-query skill）**
 
-大量国内行业信息（活动通知、行业新闻、公司动态）只在微信公众号发布，是Other平台无法覆盖的重要信息源。
+大量国内行业信息（活动通知、行业新闻、公司动态）只在微信公众号发布，是其他平台无法覆盖的重要信息源。
 
 **集成方式：** wechat-query-skill 已通过符号链接安装到 `~/.qclaw/skills/wechat-query`
 
@@ -179,6 +179,77 @@ For AI events, use `references/source_registry_ai_events.md`.
 1. wechat-download-api 服务已部署并运行（需要 Docker）
 2. 已使用公众号管理员微信扫码登录（登录有效期约 4 天）
 3. 已订阅相关领域的公众号
+
+#### 微信公众号账号库（Pre-defined Accounts Registry）
+
+**目的：** 减少账号探索时间，直接使用预定义的高质量公众号 fakeid
+
+**账号库文件：** `references/wechat_accounts_registry.md`
+
+**支持领域：**
+1. 文娱/娱乐 (Entertainment & Music)
+2. 财经/金融 (Finance & Economy) - ✅ 已填充 8 个账号
+3. 体育 (Sports)
+4. 医疗/健康 (Healthcare & Medical)
+5. 教育 (Education)
+6. 科技/AI (Technology & AI)
+7. 游戏 (Gaming)
+8. 汽车出行 (Automotive)
+9. 房产/地产 (Real Estate)
+10. 消费/零售 (Consumer & Retail)
+11. 法律/政策 (Law & Policy)
+12. 其他垂直领域 (Other Verticals)
+
+**使用逻辑：**
+
+**场景 1：账号库中有所需领域的公众号**
+```
+User: "搜索音乐行业最新动态"
+
+Agent:
+1. 检查 wechat_accounts_registry.md 的文娱/音乐板块
+2. 找到预定义账号：摇滚客、音乐财经、网易云音乐
+3. 直接使用 fakeid 获取文章：/api/public/articles?fakeid=MzIwNzQxMjM0NQ==
+4. 无需账号探索，直接返回结果 ✅
+```
+
+**场景 2：账号库中无所需公众号**
+```
+User: "搜索某个小众音乐公众号的文章"
+
+Agent:
+1. 检查 wechat_accounts_registry.md
+2. 未找到该公众号
+3. 询问用户：
+   "未找到该公众号的预设账号。请选择：
+   a) 搜索并添加到账号库（推荐，方便后续使用）
+   b) 仅本次搜索，不保存
+   c) 使用其他信息源"
+4. 根据用户选择执行
+```
+
+**场景 3：Agent 自动探索并更新账号库**
+```
+User: "查找AI行业的最新新闻"
+
+Agent:
+1. 检查 wechat_accounts_registry.md 的科技/AI 板块
+2. 找到预定义账号：36氪、量子位、机器之心
+3. 获取这些账号的文章
+4. 同时搜索更多 AI 相关公众号："AI 新闻"、"人工智能 资讯"
+5. 将新发现的高质量账号添加到账号库
+6. 返回综合结果
+```
+
+**更新账号库的方法：**
+
+详见 README.md 的「Managing WeChat Official Account Registry」章节，或运行：
+```bash
+cd /Users/zhuoyuwei/broad-information-research-skill
+python3 scripts/query_wechat_fakeids.py
+```
+
+---
 
 **在子代理中查询微信公众号文章时，使用以下 API：**
 
@@ -194,7 +265,7 @@ For AI events, use `references/source_registry_ai_events.md`.
 | `GET /api/health` | 健康检查 | 先确认服务可用 |
 | `GET /api/admin/status` | 登录状态检查 | 确认登录有效 |
 
-**默认服务地址：** `http://localhost:18080`（请确认实际部署端口）
+**默认服务地址：** `http://localhost:18080`（请确认实际部署端口，当前实际端口为 5000）
 
 **查询流程：**
 1. 先 `GET /api/health` 确认服务可用

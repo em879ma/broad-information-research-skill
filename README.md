@@ -357,6 +357,155 @@ This skill uses **WeChat Query Skill** to search WeChat official account article
 
 When searching Chinese-language sources, the skill will automatically ask if you want to install it.
 
+### Managing WeChat Official Account Registry
+
+This skill pre-defines high-quality WeChat official accounts by vertical domain to reduce account discovery time.
+
+**Registry file:** `references/wechat_accounts_registry.md`
+
+#### Why Pre-define Accounts?
+
+Without pre-defined accounts, every search requires:
+1. Search for accounts using keywords
+2. Identify the correct account from results
+3. Subscribe to the account
+4. Then fetch articles
+
+With pre-defined accounts:
+1. Use fakeid directly to fetch articles
+2. **Save 3-5 seconds per account**
+
+#### How to Add New Accounts
+
+**Step 1: Ensure wechat-download-api is running**
+```bash
+# Check if API is running
+curl http://localhost:5000/api/health
+
+# If not running, start it
+cd /path/to/wechat-download-api
+docker-compose up -d
+```
+
+**Step 2: Login via QR code**
+```bash
+open http://localhost:5000/login.html
+```
+Scan the QR code with WeChat.
+
+**Step 3: Search for accounts using Python script**
+```bash
+cd /Users/zhuoyuwei/broad-information-research-skill
+
+# Edit the ACCOUNTS list in scripts/query_wechat_fakeids.py
+# Add your account names
+
+# Run the script
+python3 scripts/query_wechat_fakeids.py
+```
+
+**Step 4: Copy results to registry**
+
+The script outputs table rows like:
+```markdown
+| 摇滚客 | `MzIwNzQxMjM0NQ==` | rockchinamusic | TODO | TODO |
+```
+
+Copy these rows into `references/wechat_accounts_registry.md` under the appropriate domain section.
+
+**Step 5: Fill in descriptions and use cases**
+```markdown
+| 摇滚客 | `MzIwNzQxMjM0NQ==` | rockchinamusic | 摇滚音乐资讯、乐队访谈 | 音乐行业动态、演出信息 |
+```
+
+**Step 6: Commit and push**
+```bash
+git add references/wechat_accounts_registry.md
+git commit -m "feat: Add WeChat accounts for Music domain"
+git push
+```
+
+#### Manual Method (Alternative)
+
+If you prefer manual lookup:
+
+```python
+import requests
+
+# Search for account
+resp = requests.get(
+    "http://localhost:5000/api/public/searchbiz",
+    params={"query": "公众号名称"}
+)
+
+data = resp.json()
+if data.get("success"):
+    for account in data["data"]["list"]:
+        print(f"Name: {account['nickname']}")
+        print(f"Fakeid: {account['fakeid']}")
+        print(f"Alias: {account.get('alias', 'N/A')}")
+```
+
+#### Supported Domains
+
+The registry supports 12 vertical domains:
+
+1. **文娱/娱乐** (Entertainment & Music)
+2. **财经/金融** (Finance & Economy) - 8 accounts pre-defined
+3. **体育** (Sports)
+4. **医疗/健康** (Healthcare & Medical)
+5. **教育** (Education)
+6. **科技/AI** (Technology & AI)
+7. **游戏** (Gaming)
+8. **汽车出行** (Automotive & Transportation)
+9. **房产/地产** (Real Estate)
+10. **消费/零售** (Consumer & Retail)
+11. **法律/政策** (Law & Policy)
+12. **其他** (Other Verticals)
+
+#### How the Skill Uses This Registry
+
+**Scenario 1: Account is pre-defined in registry**
+```
+User: "搜索音乐行业最新动态"
+
+Skill:
+1. Check wechat_accounts_registry.md for Music domain accounts
+2. Found: 摇滚客, 音乐财经, 网易云音乐
+3. Use fakeid directly: /api/public/articles?fakeid=MzIwNzQxMjM0NQ==
+4. Fetch articles
+5. No account discovery needed ✅
+```
+
+**Scenario 2: Account is NOT in registry**
+```
+User: "搜索某个小众音乐公众号的文章"
+
+Skill:
+1. Check wechat_accounts_registry.md
+2. Account not found
+3. Ask user:
+   "未找到该公众号的预设账号。是否需要：
+   a) 搜索并添加该公众号到账号库？
+   b) 仅本次搜索，不保存到账号库？
+   c) 使用其他信息源？"
+4. User chooses option
+5. Execute accordingly
+```
+
+**Scenario 3: Agent auto-discovery**
+```
+User: "查找AI行业的最新新闻"
+
+Skill:
+1. Check wechat_accounts_registry.md for AI/Tech domain accounts
+2. Found: 36氪, 量子位, 机器之心
+3. Fetch articles from these accounts
+4. Also search for additional accounts: "AI 新闻", "人工智能 资讯"
+5. Add newly discovered high-quality accounts to registry
+6. Return comprehensive results
+```
+
 ---
 
 ## 📝 Examples
