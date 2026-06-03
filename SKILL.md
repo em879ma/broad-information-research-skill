@@ -34,17 +34,17 @@ This skill helps users collect and evaluate information from different source ty
 Present these 5 options + "Other":
 
 ```
-请选择您想查找的信息类型：
+Please select the type of information you want to find:
 
-1. 学术研究 (Academic Research) - 论文、文献综述、研究空白
-2. 竞品分析 (Competitor Analysis) - 产品对比、功能、定价、定位
-3. 领域新闻 (Domain News) - 最近新闻、最新进展、事件时间线
-4. 市场动向 (Market Trends) - 市场方向、行业势头、投资信号
-5. 活动/会议搜集 (Events & Conferences) - 会议、聚会、峰会、黑客松
+1. Academic Research (Academic Research) - Papers, literature review, research gaps
+2. Competitor Analysis (Competitor Analysis) - Product comparison, features, pricing, positioning
+3. Domain News (Domain News) - Recent news, latest developments, event timeline
+4. Market Trends (Market Trends) - Market direction, industry momentum, investment signals
+5. Events & Conferences (Events & Conferences) - Conferences, meetups, summits, hackathons
 
-6. 其他 (Other) - 政策/监管、公司情报、或其他自定义需求
+6. Other (Other) - 政策/监管、公司情报、或Other自定义需求
 
-请输入选项编号 (1-6) 或直接描述您的需求：
+Please enter option number (1-6) or describe your request directly:
 ```
 
 ### Step 2: Guide User to Input Specific Request
@@ -53,69 +53,69 @@ Based on the user's choice, ask targeted follow-up questions:
 
 **If Academic Research (1):**
 ```
-请提供以下信息（尽可能详细）：
-- 研究主题或问题：
-- 时间范围（例如：2020-2026）：
-- 文献类型（例如：同行评审论文、预印本、综述）：
-- 特别关注的点（例如：研究方法、主要发现、局限性）：
+Please provide the following information (as detailed as possible):
+- Research topic or question:
+- Time range (e.g., 2020-2026):
+- Literature type (e.g., peer-reviewed papers, preprints, reviews):
+- Specific focus (e.g., methodology, key findings, limitations):
 
-示例请求："查找 GLP-1 受体激动剂与肾移植结局的近期论文，时间范围 2020-2026"
+Example request:"查找 GLP-1 受体激动剂与肾移植结局的近期论文，时间范围 2020-2026"
 ```
 
 **If Competitor Analysis (2):**
 ```
-请提供以下信息（尽可能详细）：
-- 您的产品/公司名称（可选）：
-- 需要分析的竞品（例如：Otter.ai, Fireflies.ai）：
-- 关注维度（例如：功能、定价、用户评价、市场定位）：
-- 目标用户群（例如：企业、个人、开发者）：
+Please provide the following information (as detailed as possible):
+- Your product/company name (optional):
+- Competitors to analyze (e.g., Otter.ai, Fireflies.ai):
+- Focus dimensions (e.g., features, pricing, user reviews, market positioning):
+- Target user group (e.g., enterprise, individual, developers):
 
-示例请求："分析 AI 会议助手产品的竞品，对比 Otter.ai、Fireflies.ai 和 Fathom 的功能、定价和用户评价"
+Example request:"分析 AI 会议助手产品的竞品，对比 Otter.ai、Fireflies.ai 和 Fathom 的功能、定价和用户评价"
 ```
 
 **If Domain News (3):**
 ```
-请提供以下信息（尽可能详细）：
-- 关注领域或主题：
-- 地区（例如：中国、美国、全球）：
-- 时间范围（例如：过去一周、本月、最近 30 天）：
-- 特别关注的事件类型（例如：产品发布、政策变化、融资新闻）：
+Please provide the following information (as detailed as possible):
+- Domain or topic of interest:
+- Region (e.g., China, US, Global):
+- Time range (e.g., past week, this month, last 30 days):
+- Specific event types (e.g., product launches, policy changes, funding news):
 
-示例请求："搜集中国 AI 监管政策的最新新闻，时间范围过去一个月"
+Example request:"搜集中国 AI 监管政策的最新新闻，时间范围过去一个月"
 ```
 
 **If Market Trends (4):**
 ```
-请提供以下信息（尽可能详细）：
-- 关注行业或领域：
-- 地区（例如：中国、美国、全球）：
-- 时间范围（例如：2026 年、过去一年）：
-- 关注信号（例如：市场规模、增长率、融资活动、并购）：
+Please provide the following information (as detailed as possible):
+- Industry or domain of interest:
+- Region (e.g., China, US, Global):
+- Time range (e.g., 2026, past year):
+- Focus signals (e.g., market size, growth rate, funding activities, M&A):
 
-示例请求："分析 2026 年 AI Agent 的市场动向，关注投资机会和新兴市场"
+Example request:"分析 2026 年 AI Agent 的Market Trends，关注投资机会和新兴市场"
 ```
 
 **If Events & Conferences (5):**
 ```
-请提供以下信息（尽可能详细）：
-- 活动类型（例如：会议、黑客松、聚会、研讨会）：
-- 城市或地区（例如：上海、北京、全球）：
-- 时间范围（例如：下个月、2026 年 7 月）：
-- 关注主题（例如：AI、区块链、Web3）：
+Please provide the following information (as detailed as possible):
+- Event type (e.g., conference, hackathon, meetup, workshop):
+- City or region (e.g., Shanghai, Beijing, Global):
+- Time range (e.g., next month, July 2026):
+- Focus topic (e.g., AI, blockchain, Web3):
 
-示例请求："查找上海下个月的 AI 相关活动，包括会议、黑客松和开发者聚会"
+Example request:"查找上海下个月的 AI 相关活动，包括会议、黑客松和开发者聚会"
 ```
 
 **If Other (6):**
 ```
-请描述您的需求：
-- 信息类型（例如：政策/监管、公司情报、自定义）：
-- 具体内容：
-- 时间范围（如有）：
-- 地区（如有）：
-- 其他要求：
+Please describe your request:
+- Information type (e.g., policy/regulation, company intelligence, custom):
+- Specific content:
+- Time range (if applicable):
+- Region (if applicable):
+- Other要求：
 
-示例请求："追踪欧盟 AI 法规的最新变化，关注对 AI 公司的合规要求"
+Example request:"追踪欧盟 AI 法规的最新变化，关注对 AI 公司的合规要求"
 ```
 
 ### Step 3: Confirm and Start Research
@@ -124,13 +124,13 @@ After collecting the user's input:
 
 1. **Summarize the request** to confirm understanding:
 ```
-根据您的输入，我将为您进行【模式名称】研究：
-- 主题：【提取的主题】
-- 时间范围：【提取的时间范围】
-- 地区：【提取的地区】
-- 关注点：【提取的关注点】
+Based on your input, I will conduct [mode name] research:
+- Topic: [extracted topic]
+- Time range: [extracted time range]
+- Region: [extracted region]
+- Focus: [extracted focus]
 
-确认开始研究？ (yes/no)
+Confirm to start research? (yes/no)
 ```
 
 2. **If user confirms (yes)**: Proceed to task classification and normal workflow
@@ -160,7 +160,7 @@ For AI events, use `references/source_registry_ai_events.md`.
 
 **微信公众号信息源（wechat-query skill）**
 
-大量国内行业信息（活动通知、行业新闻、公司动态）只在微信公众号发布，是其他平台无法覆盖的重要信息源。
+大量国内行业信息（活动通知、行业新闻、公司动态）只在微信公众号发布，是Other平台无法覆盖的重要信息源。
 
 **集成方式：** wechat-query-skill 已通过符号链接安装到 `~/.qclaw/skills/wechat-query`
 
@@ -173,11 +173,11 @@ For AI events, use `references/source_registry_ai_events.md`.
 
 | API | 用途 | 示例 |
 |-----|------|------|
-| `GET /api/public/searchbiz?keyword=xxx` | 搜索公众号 | 搜索「量子位」「机器之心」等 AI 媒体 |
+| `GET /api/public/searchbiz?query=xxx` | 搜索公众号 | 搜索「量子位」「机器之心」等 AI 媒体 |
 | `POST /api/rss/subscribe` (body: `{"fakeid":"xxx"}`) | 订阅公众号 | 先搜索获取 fakeid |
 | `GET /api/rss/subscriptions` | 查看已订阅列表 | 确认已有订阅 |
 | `GET /api/public/articles?fakeid=xxx` | 获取公众号文章列表 | 拉取最新文章 |
-| `GET /api/public/articles/search?fakeid=xxx&keyword=xxx` | 按关键词搜索文章 | 在公众号内搜索特定主题 |
+| `GET /api/public/articles/search?fakeid=xxx&query=xxx` | 按关键词搜索文章 | 在公众号内搜索特定主题 |
 | `POST /api/article/fetch` (body: `{"url":"xxx"}`) | 抓取单篇文章全文 | 用户发来链接时 |
 | `POST /api/rss/poll` | 手动触发一次轮询 | 立即拉取所有订阅号的最新文章 |
 | `GET /api/health` | 健康检查 | 先确认服务可用 |
@@ -213,7 +213,7 @@ For AI events, use `references/source_registry_ai_events.md`.
 
 是否需要现在部署？
 - 回复「部署」→ 我来帮你一键安装（需要 Docker，约 3-5 分钟）
-- 回复「跳过」→ 本次搜索跳过微信公众号渠道，继续使用其他来源
+- 回复「跳过」→ 本次搜索跳过微信公众号渠道，继续使用Other来源
 
 部署需要：
 - Docker（如未安装会自动通过 Homebrew 安装）
@@ -248,7 +248,7 @@ curl -s http://localhost:5000/api/health
 
 **如果用户选择「跳过」：**
 - 在报告中注明「微信公众号信息源未启用（用户选择跳过）」
-- 继续使用其他信息源完成搜集
+- 继续使用Other信息源完成搜集
 
 **⚠️ 如果 MediaCrawler 不可用（未安装或未配置）：**
 
@@ -263,7 +263,7 @@ curl -s http://localhost:5000/api/health
 
 是否需要现在安装？
 - 回复「安装」→ 我来帮你一键安装（需要 Python >=3.10、uv、Chrome 浏览器）
-- 回复「跳过」→ 本次搜索跳过国内社交媒体渠道，继续使用其他来源
+- 回复「跳过」→ 本次搜索跳过国内社交媒体渠道，继续使用Other来源
 
 安装需要：
 - Python >= 3.10
@@ -388,7 +388,7 @@ cd /Users/zhuoyuwei/MediaCrawler && uv run python main.py --platform xhs --lt qr
 
 **如果用户选择「跳过」：**
 - 在报告中注明「国内社交媒体信息源未启用（用户选择跳过）」
-- 继续使用其他信息源完成搜集
+- 继续使用Other信息源完成搜集
 
 **⚠️ 常见问题：**
 1. **API 服务器启动后立即退出** → 不使用 API 模式，改用 CLI 模式（本文档已更新）
@@ -790,7 +790,7 @@ auto_export: false  # 是否自动导出
 ### 何时使用子代理
 
 在以下情况下使用子代理：
-- 任务有多个不同的组成部分（例如：学术研究需要搜索多个数据库）
+- 任务有多个不同的组成部分（例如：Academic Research需要搜索多个数据库）
 - 输出会非常长（50+ 项，10+ 页）
 - 需要并行处理（同时搜索多个来源）
 - 希望提高输出质量（每个子代理专注于一个部分）
@@ -822,7 +822,7 @@ auto_export: false  # 是否自动导出
 
 ### 按模式划分的子代理工作流
 
-#### 1. 学术研究（Academic Research）
+#### 1. Academic Research（Academic Research）
 
 为每个数据库生成独立的子代理：
 
@@ -840,7 +840,7 @@ auto_export: false  # 是否自动导出
 3. 使用 `scripts/score_sources.py` 评分
 4. 生成最终报告（使用 `academic_research_template.md`）
 
-#### 2. 竞品分析（Competitor Analysis）
+#### 2. Competitor Analysis（Competitor Analysis）
 
 为每个竞品生成独立的子代理：
 
@@ -860,7 +860,7 @@ auto_export: false  # 是否自动导出
 
 **🎯 竞品参考商家（必须包含）：**
 
-在竞品分析报告中，**必须附上该产品/赛道中已经做起来的商家链接或名字**，给用户一个更直观的经验参考。具体要求：
+在Competitor Analysis报告中，**必须附上该产品/赛道中已经做起来的商家链接或名字**，给用户一个更直观的经验参考。具体要求：
 
 1. **标注参考商家** — 对每个竞品或行业标杆，提供：
    - 商家名称（中英文）
@@ -889,7 +889,7 @@ auto_export: false  # 是否自动导出
    - 行业论坛/Reddit 上被推荐的商家
    - 1688/阿里巴巴上评分高的供应商
 
-#### 3. 市场动向（Market Trends）
+#### 3. Market Trends（Market Trends）
 
 为每个数据源生成独立的子代理：
 
@@ -905,9 +905,9 @@ auto_export: false  # 是否自动导出
 1. 等待所有子代理完成
 2. 提取市场规模、增长率、投资信号
 3. 识别趋势和机会
-4. 生成市场动向报告（使用 `market_trend_template.md`）
+4. 生成Market Trends报告（使用 `market_trend_template.md`）
 
-#### 4. 活动/会议搜集（Events & Conferences）
+#### 4. Events & Conferences（Events & Conferences）
 
 为每个活动平台生成独立的子代理：
 
@@ -941,7 +941,7 @@ auto_export: false  # 是否自动导出
 - 使用 `subagents` 工具，`action="list"` 检查错误状态
 - 使用修改后的参数重试任务
 - 如果重试失败，在最终输出中注明失败原因
-- 继续处理其他子代理的结果
+- 继续处理Other子代理的结果
 
 ### 超时处理
 
@@ -1122,3 +1122,52 @@ Current version: 0.1 MVP
 ## License
 
 MIT License - see LICENSE file for details.
+
+---
+
+## Post-Search Export Prompt (Required)
+
+After completing the research and generating the structured output, **MUST ask the user**:
+
+```
+Research completed! How would you like to save the results?
+
+1. Markdown (.md) - Easy to read and edit
+2. JSON (.json) - For programmatic processing
+3. CSV (.csv) - For Excel analysis
+4. Word (.docx) - Formal document
+5. PDF (.pdf) - For printing/sharing
+6. Don't save - Just show in chat
+
+Please select option (1-6):
+```
+
+**If user selects 1-5**, save the output to file using the appropriate format:
+
+```python
+# Save as Markdown
+write to: outputs/{mode}_{topic}_{timestamp}.md
+
+# Save as JSON  
+write to: outputs/{mode}_{topic}_{timestamp}.json
+
+# Save as CSV
+write to: outputs/{mode}_{topic}_{timestamp}.csv
+```
+
+**File naming convention:**
+- Mode: academic_research, competitor_analysis, domain_news, market_trends, events_collection
+- Topic: first 3 words of the research topic (lowercase, underscores)
+- Timestamp: YYYYMMDD_HHMM
+
+**Example:** `academic_research_donor_obesity_20260603_1645.md`
+
+**After saving, inform the user:**
+```
+✅ Results saved to: outputs/academic_research_donor_obesity_20260603_1645.md
+
+You can also export to other formats later by saying:
+"Export to PDF" or "Save as Word document"
+```
+
+---
