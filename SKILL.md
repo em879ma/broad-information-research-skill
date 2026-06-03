@@ -23,7 +23,18 @@ This skill helps users collect and evaluate information from different source ty
 
 ## Workflow
 
-**Interactive Guide Mode (Default)** → User request → Task classification → Channel selection → Keyword generation → Information retrieval → Deduplication & verification → Credibility scoring → Structured output
+**Interactive Guide Mode (Default)**:
+
+1. User request
+2. Task classification
+3. Channel selection
+4. Keyword generation
+5. Information retrieval
+6. **🛑 Deduplication (MANDATORY)** ← Required checkpoint!
+7. Verification
+8. Credibility scoring
+9. Structured output
+10. **Ask user: Save to file?**
 
 ## Interactive Guide Flow (Required on Skill Invocation)
 
@@ -453,12 +464,66 @@ For each item, assign:
 
 Use `references/reliability_scoring.md` for detailed scoring rules.
 
-## Deduplication and Conflict Rules
+## Deduplication and Conflict Rules (MANDATORY)
 
-- If multiple sources report the same event, keep the most official or original source
-- If sources conflict, do not merge silently; report the conflict
-- If an event/news item is expired, exclude it unless the user asks for historical results
-- If only weak sources support an item, mark it as low confidence
+**🛑 This is a REQUIRED step - do NOT skip deduplication!**
+
+### Step 1: Collect All Results
+After searching multiple sources, you will have a list of results from different platforms. **Must deduplicate before scoring and output.**
+
+### Step 2: Run Deduplication
+
+**Option A: Use dedupe_results.py script (Recommended)**
+
+```bash
+python scripts/dedupe_results.py --input raw_results.json --output deduped_results.json --similarity-threshold 0.85
+```
+
+**Option B: Manual Deduplication**
+
+If script is not available, manually deduplicate by:
+1. **Title matching** - Remove items with identical or near-identical titles (Jaccard similarity > 0.85)
+2. **URL matching** - Remove items with identical URLs
+3. **Entity matching** - For events/companies, remove duplicates by name + date + location
+4. **DOI matching** - For academic papers, remove duplicates by DOI
+
+### Step 3: Deduplication Rules
+
+- **If multiple sources report the same event**: Keep the most official or original source
+- **If sources conflict**: Do NOT merge silently; report the conflict explicitly
+- **If an event/news item is expired**: Exclude it unless the user asks for historical results
+- **If only weak sources support an item**: Mark it as low confidence
+- **Cross-verify claims**: Prefer items confirmed by multiple independent sources
+
+### Step 4: Document Deduplication
+
+**Must include in final output:**
+```
+### Deduplication Summary
+- Total results collected: [N]
+- Duplicates removed: [M]
+- Unique results after deduplication: [N-M]
+- Conflicts detected: [list conflicts, if any]
+```
+
+### Example Deduplication Output
+
+```json
+{
+  "total_results": 45,
+  "duplicates_removed": 12,
+  "unique_results": 33,
+  "conflicts": [
+    {
+      "item": "AI Conference Shanghai 2026",
+      "conflict": "Date differs: Source A says June 15, Source B says June 22",
+      "resolution": "Verified official website - correct date is June 15"
+    }
+  ]
+}
+```
+
+**⚠️ Do NOT proceed to Scoring and Output until deduplication is complete!**
 
 ## Output
 
