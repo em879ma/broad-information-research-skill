@@ -598,6 +598,92 @@ If script is not available, manually deduplicate by:
 
 ## Output
 
+### 🛑 RULE #1: Raw Results BEFORE Summary (MANDATORY)
+
+**This is the most important output rule. NEVER skip this step.**
+
+The output MUST follow this strict order:
+
+**Part 1 — Raw Found Information (Required, always first)**
+**Part 2 — Deduplication Summary**
+**Part 3 — Credibility Scoring Table**
+**Part 4 — Synthesis / Summary / Analysis**
+
+#### Part 1: Raw Found Information
+
+You MUST list EVERY piece of information found during research before giving any summary. For each item, include:
+
+- **Title** — The title or headline of the found item
+- **Source** — Where it came from (e.g., Google Scholar, Reuters, Eventbrite, 小红书)
+- **Real URL** — The actual, clickable link to the source (mandatory — do NOT omit)
+- **Date** — Publication date or event date
+- **Key Content** — A brief excerpt or key data points (1-3 sentences)
+- **Confidence** — High / Medium / Low
+
+**Format:**
+```
+### Found Results ([total count])
+
+#### Result 1
+- **Title:** [title]
+- **Source:** [source name]
+- **URL:** [https://actual-link-to-source.com]
+- **Date:** [YYYY-MM-DD]
+- **Content:** [brief excerpt or key data]
+- **Confidence:** High / Medium / Low
+
+#### Result 2
+- **Title:** [title]
+- **Source:** [source name]
+- **URL:** [https://actual-link-to-source.com]
+- **Date:** [YYYY-MM-DD]
+- **Content:** [brief excerpt or key data]
+- **Confidence:** High / Medium / Low
+
+... (continue for ALL results)
+```
+
+**⚠️ Critical Rules for Part 1:**
+
+1. **NEVER skip Part 1** — Even if you found 100+ results, you MUST list them all (or at least the top 30-50 with a note about remaining items)
+2. **NEVER give a summary without first showing raw results** — The user needs to see WHAT you found before reading your interpretation
+3. **Every result MUST have a real URL** — If you cannot provide a URL, mark it as "[URL not available]" and note why
+4. **Do NOT fabricate URLs** — Only include links you actually found during search
+5. **Do NOT truncate** — If the list is very long, output them ALL. If approaching token limits, save to file instead of truncating
+6. **Preserve source diversity** — Show results from all sources searched, not just one
+
+#### Part 2: Deduplication Summary
+
+```
+### Deduplication Summary
+- Total results collected: [N]
+- Duplicates removed: [M]
+- Unique results after deduplication: [N-M]
+- Conflicts detected: [list conflicts, if any]
+```
+
+#### Part 3: Credibility Scoring Table
+
+```
+### Scoring Summary
+| # | Title | Source | Relevance | Reliability | Freshness | Confidence |
+|---|-------|--------|-----------|-------------|-----------|------------|
+| 1 | ... | ... | 5/5 | 4/5 | 5/5 | High |
+| 2 | ... | ... | 4/5 | 5/5 | 3/5 | Medium |
+```
+
+#### Part 4: Synthesis / Summary
+
+Only AFTER Parts 1-3 are complete, provide your analysis:
+- Key findings and patterns
+- Conflicting information (if any)
+- Research gaps
+- Recommendations
+
+---
+
+### Output Templates
+
 Choose the output template based on the mode:
 
 - **Academic research** → `assets/output_templates/academic_research_template.md`
@@ -612,6 +698,8 @@ Always include:
 - Selected results
 - Excluded or uncertain items when important
 - Synthesis or recommendation when requested
+
+**⚠️ Regardless of which template is used, the output order is ALWAYS: Raw Results → Deduplication → Scoring → Summary. Templates provide the structure for each part, but the order must never be reversed.**
 
 ## Output Integrity (Critical)
 
